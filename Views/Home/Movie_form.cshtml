@@ -1,0 +1,54 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+    ViewData["Title"] = "Movie Form";
+}
+<!--Connects the movie_app_response.cs file (Model) to the Form-->
+@model Mission4.Models.Movie_app_response
+
+<h1>New Movie Review? Add here: </h1>
+
+<!--The form connects to the model or Movie_app_response-->
+<div>
+    <form method="post">
+        <!--Brings the input into focus. Make them pairs-->
+        <label asp-for="Category">Category</label>
+        <input asp-for="Category" />
+        <br />
+
+        <label asp-for="Title">Movie Title</label>
+        <input asp-for="Title" />
+        <br />
+
+        <label asp-for="Director">Director(s)</label>
+        <input asp-for="Director" />
+        <br />
+
+        <label asp-for="Rating">Rating</label>
+        <select asp-for="Rating">
+            <option value="1">G</option>
+            <option value="2">PG</option>
+            <option value="3">PG-13</option>
+            <option value="4">R</option>
+        </select>
+        <br />
+
+        <label asp-for="Edited">Edited</label>
+        <select asp-for="Edited">
+            <option value="true">Yes</option>
+            <option value="false">No</option>
+        </select>
+        <br />
+
+        <label asp-for="Lent">Lent to:</label>
+        <input asp-for="Lent" />
+        <br />
+
+        <label asp-for="Notes">Notes</label>
+        <input asp-for="Notes" />
+        <br />
+
+        <button type="submit">Add Movie</button>
+    </form>
+</div>
