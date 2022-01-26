@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Mission4.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -24,6 +25,13 @@ namespace Mission4
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllersWithViews();
+
+            services.AddDbContext<MovieFormContext>(options =>
+           {
+               options.UseSqlite(Configuration["ConnectionStrings : MovieConnection"]);
+           }
+
+                );
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
