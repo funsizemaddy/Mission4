@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.EntityFrameworkCore;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -8,7 +9,7 @@ namespace Mission4.Models
     public class MovieFormContext : DbContext
     {
         //Contrustor
-        public MovieFormContext(DbContextOption<MovieFormContext> options) : base(options)
+        public MovieFormContext(DbContextOptions<MovieFormContext> options) : base (options)
         {
 
         }

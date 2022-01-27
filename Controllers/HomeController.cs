@@ -16,7 +16,7 @@ namespace Mission4.Controllers
         public HomeController(ILogger<HomeController> logger, MovieFormContext MovieForm)
         {
             _logger = logger;
-            _MovieContext = MovieForm
+            _MovieContext = MovieForm;
         }
 
         public IActionResult Index()
