@@ -14,6 +14,7 @@ namespace Mission4.Models
 
         }
         public DbSet<Movie_app_response> Responses { get; set; }
+        public DbSet<Category> Categories { get; set; }
 
         protected override void OnModelCreating(ModelBuilder mb)
         {
@@ -21,16 +22,18 @@ namespace Mission4.Models
                 new Movie_app_response 
                 { 
                     MovieID = 1,
-                    Category = "Action/Sci-fi",
+                    CategoryId = 1,
                     Title = "Battleship",
+                    Year = 2012 ,
                     Director = "Peter Berg",
                     Rating = "PG-13"
                 },
                 new Movie_app_response
                 { 
                     MovieID = 2,
-                    Category = "Animated Musical Fantasy Comedy-Drama",
+                    CategoryId = 4,
                     Title = "Brother Bear",
+                    Year = 2003,
                     Director = "Aaron Blaise, Robert Walker",
                     Rating = "G"
 
@@ -38,11 +41,22 @@ namespace Mission4.Models
                 new Movie_app_response
                 {
                     MovieID = 3,
-                    Category = "Romance",
+                    CategoryId = 3,
                     Title = "Safe Haven",
+                    Year = 2013,
                     Director = "Lasse Stevens",
                     Rating = "PG-13",
                 }
+                );
+            mb.Entity<Category>().HasData(
+                new Category { CategoryId = 1, CategoryName = "Action/Adventure" },
+                new Category { CategoryId = 2, CategoryName = "Comedy" },
+                new Category { CategoryId = 3, CategoryName = "Drama" },
+                new Category { CategoryId = 4, CategoryName = "Family" },
+                new Category { CategoryId = 5, CategoryName = "Horror/Suspense" },
+                new Category { CategoryId = 6, CategoryName = "Miscellaneous" },
+                new Category { CategoryId = 7, CategoryName = "Television" },
+                new Category { CategoryId = 8, CategoryName = "VHS" }
                 );
         }
             }  

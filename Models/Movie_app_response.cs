@@ -11,16 +11,28 @@ namespace Mission4.Models
         [Key]
         [Required]
         public int MovieID { get; set; }
-        [Required]
-        public string Category { get; set; }
-        [Required]
+        
+        //Builds the foreign key relationship to the othe category table
+        [Required(ErrorMessage ="Please select a category")]
+        public int CategoryId { get; set; }
+        public Category Category { get; set; }
+
+
+        [Required(ErrorMessage ="Did you forget to enter a movie title?")]
         public string Title { get; set; }
-        [Required]
+
+        [Required(ErrorMessage ="What was the director's name again?")]
         public string Director { get; set; }
-        [Required]
+
+        [Required(ErrorMessage="Please enter the year the movie was made.")]
+        public short Year { get; set; }
+
+        [Required(ErrorMessage ="Please select a rating from the drop down. ")]
         public string Rating { get; set; }
+
         public bool Edited { get; set; }
         public string Lent { get; set; }
+
         [MaxLength(25)]
         public string Notes { get; set; }
     }

@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using Mission4.Models;
 using System;
@@ -11,20 +12,14 @@ namespace Mission4.Controllers
 {
     public class HomeController : Controller
     {
-        private readonly ILogger<HomeController> _logger;
         private MovieFormContext _MovieContext { get; set; }
-        public HomeController(ILogger<HomeController> logger, MovieFormContext MovieForm)
+        public HomeController(MovieFormContext MovieForm)
         {
-            _logger = logger;
+       
             _MovieContext = MovieForm;
         }
 
         public IActionResult Index()
-        {
-            return View();
-        }
-
-        public IActionResult Privacy()
         {
             return View();
         }
@@ -38,23 +33,73 @@ namespace Mission4.Controllers
         }
 
         [HttpGet]
-        public IActionResult Add_to_Movies()
+        public IActionResult Movie_form()
         {
-            return View("Movie_form");
+            ViewBag.Categories = _MovieContext.Categories.ToList();
+         
+            return View();
         }
 
         [HttpPost]
-        public IActionResult Add_to_Movies(Movie_app_response mar)
+        public IActionResult Movie_form(Movie_app_response mar)
         {
-            _MovieContext.Add(mar);
-            _MovieContext.SaveChanges();
-            return View("Conformation", mar);
+            if (ModelState.IsValid)
+            {
+                _MovieContext.Add(mar);
+                _MovieContext.SaveChanges();
+
+                return View("Conformation", mar);
+            }
+            else
+            {
+                ViewBag.Categories = _MovieContext.Categories.ToList();
+                return View();
+            }
         }
 
-        [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
-        public IActionResult Error()
+        [HttpGet]
+        public IActionResult DisplayMovies()
         {
-            return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+            var applications = _MovieContext.Responses
+                .Include( i => i.Category)
+                .ToList();
+            return View(applications);
+        }
+
+        [HttpGet]
+       public IActionResult Edit (int movieID)
+        {
+            ViewBag.Categories = _MovieContext.Categories.ToList();
+
+            var edit_app = _MovieContext.Responses.Single(i => i.MovieID == movieID);
+
+            return View("Movie_form", edit_app);
+        }
+        
+        [HttpPost]
+        public IActionResult Edit (Movie_app_response ed)
+        {
+            _MovieContext.Update(ed);
+            _MovieContext.SaveChanges();
+
+            return RedirectToAction("DisplayMovies");
+        }
+
+        [HttpGet]
+        public IActionResult Delete (int movieID )
+        {
+            var delete_app = _MovieContext.Responses.Single(i => i.MovieID == movieID);
+
+            return View(delete_app);
+        }
+
+        [HttpPost]
+        public IActionResult Delete (Movie_app_response map)
+        {
+            _MovieContext.Responses.Remove(map);
+            _MovieContext.SaveChanges();
+
+            return RedirectToAction("DisplayMovies");
         }
     }
 }

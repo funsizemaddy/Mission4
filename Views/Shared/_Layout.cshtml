@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>@ViewData["Title"] - Mission4</title>
+    <title>@ViewData["Title"] - Mission5</title>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" />
 </head>
@@ -12,11 +12,13 @@
     <div>
         <!--Controller is the folder in views-->
         <!--action is connected to the controller.cs, doesn't need to be the name of the html file. We will add the file name to the view in the controller page'-->
-        <br /><br /><a asp-controller="Home" asp-action="Index">Home</a>
+        <br /><br /><a asp-controller="Home" asp-action="Index">|   Home   |</a>
       
-        <br /><a asp-controller="Home" asp-action="Podcasts">My Podcasts</a>
+        <a asp-controller="Home" asp-action="Podcasts">My Podcasts   |</a>
         
-        <br /><a asp-controller="Home" asp-action="Add_to_Movies">Add to Movies</a>
+        <a asp-controller="Home" asp-action="Movie_form">Add to Movies   |</a>
+
+        <a asp-controller="Home" asp-action="DisplayMovies">View Movies   |</a>
     </div>
 
     <br />

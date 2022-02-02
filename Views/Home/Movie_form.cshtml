@@ -13,8 +13,14 @@
 <div>
     <form method="post">
         <!--Brings the input into focus. Make them pairs-->
-        <label asp-for="Category">Category</label>
-        <input asp-for="Category" />
+        <label asp-for="CategoryId">Category</label>
+        <select asp-for="CategoryId">
+            <option value="">Select a Category</option>
+            @foreach (Category c in ViewBag.Categories)
+            {
+                <option value="@c.CategoryId">@c.CategoryName</option>
+            }
+        </select>
         <br />
 
         <label asp-for="Title">Movie Title</label>
@@ -25,12 +31,18 @@
         <input asp-for="Director" />
         <br />
 
+
+        <label asp-for="Year">Year</label>
+        <input asp-for="Year" />
+        <br />
+
         <label asp-for="Rating">Rating</label>
         <select asp-for="Rating">
-            <option value="1">G</option>
-            <option value="2">PG</option>
-            <option value="3">PG-13</option>
-            <option value="4">R</option>
+            <option value="">Select a Rating:</option>
+            <option >G</option>
+            <option >PG</option>
+            <option >PG-13</option>
+            <option >R</option>
         </select>
         <br />
 
